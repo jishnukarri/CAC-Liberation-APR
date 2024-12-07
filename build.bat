@@ -10,10 +10,10 @@ if ERRORLEVEL 1 (
 )
 
 rem CD into build tool directory
-cd %~dp0_tools/build-tool
+cd %~dp0_tools
 
 rem Install dependencies and build missions
-call npm install --silent
+call npm install --loglevel=error
 call npx gulp
 
 echo.
