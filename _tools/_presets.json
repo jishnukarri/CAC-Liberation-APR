@@ -1,7 +1,7 @@
 [
     {
         "sourceFolder": "kp_liberation.BMFayshkhabur",
-        "missionName": "kp_liberation_bmfayshkhabur",
+        "missionName": "kp_liberation",
         "map": "BMFayshkhabur",
         "configFile": "KPLIB_config.sqf",
         "variables": {
