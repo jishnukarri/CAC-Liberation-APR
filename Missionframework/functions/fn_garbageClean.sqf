@@ -4,84 +4,70 @@ params [
     ["_caller", objNull, [objNull]]
 ];
 
+// Ensure parameters are valid
+if (_centerPos isEqualTo [0, 0, 0]) exitWith { ["Zero position given"] call BIS_fnc_error; false };
+if (_radius isEqualTo 0) exitWith { ["Zero radius given"] call BIS_fnc_error; false };
+if (isNull _caller) exitWith { ["Null object given"] call BIS_fnc_error; false };
 
+// Define the caller for notifications
+private _caller = player; // The player executing the cleanup
 
-if (_centerPos isEqualTo [0, 0, 0]) exitWith {["Zero position given"] call BIS_fnc_error; false};
-if (_radius isEqualTo 0) exitWith {["Zero radius given"] call BIS_fnc_error; false};
-if (isNull _caller) exitWith {["Null object given"] call BIS_fnc_error; false};
-if (!canSuspend) exitWith {_this spawn KPLIB_fnc_garbageClean;};
-
-
-
-private _unitSpawners = units teamPlayer select { _x getVariable ["spawner", false] };
-
-private _fnc_distCheck = {
-    params ["_object", "_dist"];
-    private _isInArea = false;
-    {
-        if (_object inAreaArray [getPosATL _x, _dist, _dist] isEqualTo [_object]) then {
-            _isInArea = true;
-        };
-    } forEach _unitSpawners;
-
-    if (!_isInArea) then {
-        deleteVehicle _object;
+// Function: Check if a vehicle should be deleted (garbage)
+private _isGarbageVehicle = {
+    params ["_vehicle"];
+    // Exclude vehicles that are:
+    // - Part of logistics, FOB, or purchased vehicles
+    // - Undamaged (damage < 0.8) and functional vehicles
+    if (
+        !(isNil {_vehicle getVariable "KPLIB_logisticsVehicle"}) ||    // Skip logistics vehicles
+        !(isNil {_vehicle getVariable "KPLIB_fobVehicle"}) ||         // Skip FOB vehicles
+        !(isNil {_vehicle getVariable "KPLIB_purchasedVehicle"}) ||   // Skip purchased vehicles (if this variable exists in KP Liberation)
+        {alive _vehicle && getDammage _vehicle < 0.8 && canMove _vehicle} // Skip functional vehicles
+    ) then {
+        false
+    } else {
+        true
     };
 };
 
+// Cleanup all objects and vehicles
 
+// Move out crew from destroyed vehicles
 {
     if !(isNull objectParent _x) then { moveOut _x };
 } forEach allDeadMen;
 
-// Deleting all dead entities and various types of objects
+// Delete dead bodies and garbage objects
 { deleteVehicle _x } forEach allDead;
 { deleteVehicle _x } forEach (allMissionObjects "WeaponHolder");
 { deleteVehicle _x } forEach (allMissionObjects "WeaponHolderSimulated");
 { deleteVehicle _x } forEach (allMissionObjects "Leaflet_05_F");
 { deleteVehicle _x } forEach (allMissionObjects "Ejection_Seat_Base_F");
 
-// Cleanup vehicles
-// {
-//    if !(_x isKindOf "StaticWeapon" or unitIsUAV _x or locked _x > 1) then {
-//        [_x, 500] call _fnc_distCheck;
-//    };
-// } forEach (vehicles select { _x getVariable ["ownerSide", sideUnknown] == teamPlayer });
+// Delete destroyed or non-functional vehicles (all map-wide vehicles)
+{
+    if (
+        [_x] call _isGarbageVehicle // Identified as garbage
+    ) then {
+        deleteVehicle _x;
+    };
+} forEach vehicles;
 
-// ACE mod specific cleanup
+// ACE Mod compatibility cleanup
 if (A3A_hasACE) then {
     { deleteVehicle _x } forEach (allMissionObjects "ACE_bodyBagObject");
-    { deleteVehicle _x } forEach (allMissionObjects "UserTexture1m_F");
-    { deleteVehicle _x } forEach (allMissionObjects "ace_cookoff_Turret_MBT_01");
-    { deleteVehicle _x } forEach (allMissionObjects "ace_cookoff_Turret_MBT_02");
-    { [_x, 200] call _fnc_distCheck } forEach (allMissionObjects "ACE_Grave");
-    { [_x, 200] call _fnc_distCheck } forEach (allMissionObjects "ACE_envelope_big");
-    { [_x, 200] call _fnc_distCheck } forEach (allMissionObjects "ACE_envelope_small");
+    { deleteVehicle _x } forEach (allMissionObjects "ACE_envelope_big");
+    { deleteVehicle _x } forEach (allMissionObjects "ACE_envelope_small");
 };
 
-// GRAD mod specific cleanup
+// GRAD Mod compatibility cleanup
 if (isClass (configFile >> "CfgVehicles" >> "GRAD_envelope_short")) then {
-    { [_x, 200] call _fnc_distCheck } forEach (allMissionObjects "GRAD_envelope_short");
-    { [_x, 200] call _fnc_distCheck } forEach (allMissionObjects "GRAD_envelope_giant");
-    { [_x, 200] call _fnc_distCheck } forEach (allMissionObjects "GRAD_envelope_vehicle");
-    { [_x, 200] call _fnc_distCheck } forEach (allMissionObjects "GRAD_envelope_long");
+    { deleteVehicle _x } forEach (allMissionObjects "GRAD_envelope_short");
 };
 
-// RHS mod specific cleanup
-if (isClass (configFile / "CfgPatches" / "rhsgref_main")) then {
-    { deleteVehicle _x } forEach (allMissionObjects "rhs_a10_acesII_seat");
-    { deleteVehicle _x } forEach (allMissionObjects "rhs_a10_canopy");
-    { deleteVehicle _x } forEach (allMissionObjects "rhs_k36d5_seat");
-    { deleteVehicle _x } forEach (allMissionObjects "rhs_vs1_seat");
-    { deleteVehicle _x } forEach (allMissionObjects "rhs_mi28_door_pilot");
-    { deleteVehicle _x } forEach (allMissionObjects "rhs_mi28_door_gunner");
-    { deleteVehicle _x } forEach (allMissionObjects "rhs_mi28_wing_left");
-    { deleteVehicle _x } forEach (allMissionObjects "rhs_mi28_wing_right");
-};
-
-
+// Notify all players
 [localize "STR_GARBAGE_CLEAN_DONE"] remoteExec ["hint", _caller];
 sleep 3;
-[""] remoteExecCall ["hintSilent", _targetunits];
+[] remoteExecCall ["hintSilent", _caller]; // Silent hint for the caller to indicate completion
 
 true
