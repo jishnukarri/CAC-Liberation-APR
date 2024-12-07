@@ -93,7 +93,7 @@ KPLIB_presetEnemy = 0;
     7  = CUP Takistani Locals
     8  = CUP National Party of Chernarus
 */
-KPLIB_presetResistance = 0;
+KPLIB_presetResistance = 7;
 
 /*
     ----- Civilians preset -----
@@ -106,7 +106,7 @@ KPLIB_presetResistance = 0;
     6  = CUP Takistani Civilians
     7  = CUP Chernarussian Civilians
 */
-KPLIB_presetCivilians = 0;
+KPLIB_presetCivilians = 6;
 
 /*
     ----- Arsenal preset -----
@@ -134,10 +134,10 @@ KPLIB_presetArsenal = 1;
 */
 
 // Player side.
-KPLIB_side_player = EAST;
+KPLIB_side_player = WEST;
 
 // Enemy side.
-KPLIB_side_enemy = WEST;
+KPLIB_side_enemy = EAST;
 
 // Resistance side.
 KPLIB_side_resistance = RESISTANCE;

@@ -277,4 +277,11 @@
         },
         "workshopId": ""
     }
+	{
+        "sourceFolder": "kp_liberation.BMFayshkhabur",
+        "missionName": "kp_liberation_bmfayshkhabur",
+        "map": "BMFayshkhabur",
+        "configFile": "KPLIB_config.sqf",
+        "workshopId": ""
+    }
 ]
