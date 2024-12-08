@@ -177,8 +177,7 @@ KPLIB_o_turrets_AA = [
 
 // Enemy defence turrets that will be spawned in sectors.
 KPLIB_o_turrets_MORTAR = [
-    "O_amaiqarmy_2b14_Podnos_01",
-	"O_amaiqarmy_BM_21_01"
+    "O_amaiqarmy_2b14_Podnos_01"
 ];
 
 // Enemy SAM turrets that will be spawned in the back country
