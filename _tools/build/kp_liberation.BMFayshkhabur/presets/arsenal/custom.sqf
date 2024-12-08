@@ -1530,6 +1530,8 @@ KPLIB_arsenalItems = [
 	"CUP_U_B_CZ_DST_TShirt",
 	"usm_bdu_d",
 	"usm_bdu_d_m",
+	"usm_bdu_dcu_m",
+	"usm_bdu_dcu",
 	"CUP_H_OpsCore_Covered_MCAM_US",
 	"CUP_H_OpsCore_Covered_MCAM",
 	"CUP_H_OpsCore_Covered_MCAM_NoHS",
@@ -1630,7 +1632,7 @@ KPLIB_arsenalItems = [
 	"CUP_acc_bfa", //BFA
 	"CUP_acc_LCU_PM_Laser", //LCU-PM Laser pointer
 	"CUP_acc_mk23_lam_f" //Prototype Laser Aiming Module
-
+	
 
 ];
 
