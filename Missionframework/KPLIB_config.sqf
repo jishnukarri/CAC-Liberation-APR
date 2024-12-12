@@ -202,7 +202,7 @@ KPLIB_range_sectorCapture = 175;
 KPLIB_range_radioTowerScan = 2500;
 
 // Minimum distance to next FOB.
-KPLIB_distance_fob = 1000;
+KPLIB_distance_fob = 500;
 
 // Minimum distance to next sector.
 KPLIB_distance_sector = KPLIB_range_sectorCapture + KPLIB_range_fob;
