@@ -180,10 +180,10 @@ KPLIB_save_interval = 60;
 */
 
 // Build range around the main FOB building.
-KPLIB_range_fob = 125;
+KPLIB_range_fob = 200;
 
 // Altitude in metres for the HALO jump.
-KPLIB_height_halo = 2500;
+KPLIB_height_halo = 1000;
 
 // Range to activate a sector.
 KPLIB_range_sectorActivation   = 1000;

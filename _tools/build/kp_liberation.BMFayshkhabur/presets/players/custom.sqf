@@ -27,7 +27,7 @@ KPLIB_b_fobBuilding     = "Land_Cargo_HQ_V3_F";                         // This 
 KPLIB_b_fobBox          = "US_WarfareBContructionSite1_Base_EP1";                     // This is the FOB as a container.
 KPLIB_b_fobTruck        = "B_Truck_01_box_F";                           // This is the FOB as a vehicle.
 KPLIB_b_arsenal         = "B_supplyCrate_F";                            // This is the virtual arsenal as portable supply crates.
-KPLIB_b_mobileRespawn = "CUP_B_nM1025_Unarmed_USMC_DES";
+KPLIB_b_mobileRespawn = "CUP_B_UH1Y_UNA_USMC";
 KPLIB_b_potato01        = "CUP_B_CH53E_USMC";              // This is Potato 01, a multipurpose mobile respawn as a helicopter.
 KPLIB_b_crewUnit        = "usm_marine_90s_d_h_crew1";                                   // This defines the crew for vehicles.
 KPLIB_b_heliPilotUnit   = "CUP_B_USMC_Pilot_des";                              // This defines the pilot for helicopters.
@@ -289,7 +289,7 @@ KPLIB_b_objectsDeco = [
     ["Land_Barracks_med",0,0,0],
     ["Land_Airstrip_LightSingle_F",0,0,0],
     ["Land_HelipadAirstrip_F",0,0,0]
-]
+];
 
 
 KPLIB_b_vehSupport = [
