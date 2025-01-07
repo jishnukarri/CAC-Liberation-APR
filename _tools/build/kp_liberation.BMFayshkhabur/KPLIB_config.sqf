@@ -242,7 +242,7 @@ KPLIB_civilians_amount = 10;
 */
 
 // Civil Reputation penalty for killing a civilian.
-KPLIB_cr_kill_penalty = 5;
+KPLIB_cr_kill_penalty = 3;
 
 // Civil Reputation penalty for destroying/damaging a building.
 KPLIB_cr_building_penalty = 3;
@@ -254,13 +254,13 @@ KPLIB_cr_vehicle_penalty = 2;
 KPLIB_cr_resistance_penalty = 3;
 
 // Civil Reputation gain for liberate a sector.
-KPLIB_cr_sector_gain = 5;
+KPLIB_cr_sector_gain = 10;
 
 // Chance (0-100) that there are wounded civilians right after capturing a sector.
-KPLIB_cr_wounded_chance = 35;
+KPLIB_cr_wounded_chance = 20;
 
 // Civil Reputation gain for providing medical assistance for wounded civilians.
-KPLIB_cr_wounded_gain = 2;
+KPLIB_cr_wounded_gain = 5;
 
 
 /*
