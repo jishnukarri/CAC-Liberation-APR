@@ -276,7 +276,6 @@ class CfgTaskDescriptions {
 #include "VAM_GUI\defines.hpp"
 #include "VAM_GUI\VAM_GUI_controls.hpp"
 #include "VAM_GUI\VAM_GUI_classes.hpp"
-#include "infiSTAR_AdminMenu.hpp"
 
 class ACEX_Fortify_Presets {
     class KPLIB_Fortify {
