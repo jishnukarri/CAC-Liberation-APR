@@ -231,7 +231,10 @@ class CfgFunctions {
     #include "CfgFunctions.hpp"
     #include "KP\KPPLM\KPPLM_functions.hpp"
 	#include "vcom\cfgFunctions.hpp"
+    #include "CHVD\CfgFunctions.hpp"
 };
+
+#include "CHVD\dialog.hpp"
 
 class CfgRemoteExec
 {
